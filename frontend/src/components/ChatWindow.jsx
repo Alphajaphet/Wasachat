@@ -14,7 +14,7 @@ function StatusIcon({ status }) {
   return <span className="message-status-icon">✓</span>;
 }
 
-export default function ChatWindow({ currentUserId, contact, messages, isTyping, isOnline, lastSeen, onSend, onTyping }) {
+export default function ChatWindow({ currentUserId, contact, messages, isTyping, isOnline, lastSeen, onSend, onTyping, onAudioCall, onVideoCall }) {
   const [draft, setDraft] = useState('');
   const scrollRef = useRef(null);
 
@@ -51,12 +51,14 @@ export default function ChatWindow({ currentUserId, contact, messages, isTyping,
     <div className="chat-window">
       <div className="chat-header">
         <div className="avatar">{initials(contact.display_name)}</div>
-        <div>
+        <div style={{ flex: 1 }}>
           <div className="chat-header-name">{contact.display_name}</div>
           <div className={`chat-header-status ${isOnline ? 'online' : ''}`}>
             {isTyping ? 'typing…' : isOnline ? 'online' : lastSeen ? `last seen ${formatTime(lastSeen)}` : ''}
           </div>
         </div>
+        <button className="icon-btn-dark" onClick={onAudioCall} title="Audio call">📞</button>
+        <button className="icon-btn-dark" onClick={onVideoCall} title="Video call">📹</button>
       </div>
 
       <div className="messages-area">
