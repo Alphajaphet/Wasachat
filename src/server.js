@@ -10,6 +10,7 @@ const authRoutes = require('./routes/auth');
 const contactsRoutes = require('./routes/contacts');
 const conversationsRoutes = require('./routes/conversations');
 const statusesRoutes = require('./routes/statuses');
+const callsRoutes = require('./routes/calls');
 const { initSocket } = require('./sockets/chatSocket');
 
 const app = express();
@@ -55,6 +56,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/contacts', contactsRoutes);
 app.use('/api/conversations', conversationsRoutes);
 app.use('/api/statuses', statusesRoutes);
+app.use('/api/calls', callsRoutes);
 
 app.use((req, res) => res.status(404).json({ error: 'Not found' }));
 
