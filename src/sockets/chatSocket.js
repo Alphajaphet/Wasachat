@@ -1,4 +1,4 @@
-const { verifySocketToken } = require('../middleware/auth');
+ const { verifySocketToken } = require('../middleware/auth');
 const pool = require('../db/pool');
 const { getOrCreateConversation } = require('../routes/conversations');
 
@@ -93,6 +93,40 @@ function initSocket(io) {
       } catch (err) {
         console.error('Socket message:read error:', err);
       }
+    });
+
+    // --- WebRTC call signaling ---
+    socket.on('call:invite', ({ recipientId, callType }) => {
+      if (!recipientId) return;
+      io.to(`user:${recipientId}`).emit('call:invite', {
+        callerId: userId,
+        callType: callType === 'video' ? 'video' : 'audio',
+      });
+    });
+
+    socket.on('call:offer', ({ recipientId, offer }) => {
+      if (!recipientId || !offer) return;
+      io.to(`user:${recipientId}`).emit('call:offer', { callerId: userId, offer });
+    });
+
+    socket.on('call:answer', ({ recipientId, answer }) => {
+      if (!recipientId || !answer) return;
+      io.to(`user:${recipientId}`).emit('call:answer', { responderId: userId, answer });
+    });
+
+    socket.on('call:ice-candidate', ({ recipientId, candidate }) => {
+      if (!recipientId || !candidate) return;
+      io.to(`user:${recipientId}`).emit('call:ice-candidate', { senderId: userId, candidate });
+    });
+
+    socket.on('call:reject', ({ recipientId }) => {
+      if (!recipientId) return;
+      io.to(`user:${recipientId}`).emit('call:reject', { responderId: userId });
+    });
+
+    socket.on('call:end', ({ recipientId }) => {
+      if (!recipientId) return;
+      io.to(`user:${recipientId}`).emit('call:end', { senderId: userId });
     });
 
     socket.on('disconnect', async () => {
