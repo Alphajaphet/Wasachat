@@ -542,6 +542,114 @@ a {
   padding: 4px;
 }
 
+.icon-btn-dark {
+  background: none;
+  border: none;
+  font-size: 19px;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--teal-dark);
+}
+
+/* ---- Call overlay ---- */
+.call-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(160deg, #0b3d36, #075E54);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.call-incoming {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.call-avatar-large {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  font-weight: 600;
+  color: white;
+}
+
+.call-contact-name {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.call-status-text {
+  font-size: 15px;
+  opacity: 0.8;
+}
+
+.call-actions {
+  display: flex;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.call-actions-bottom {
+  position: absolute;
+  bottom: 60px;
+}
+
+.call-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.call-btn-reject {
+  background: var(--danger);
+  color: white;
+}
+
+.call-btn-accept {
+  background: var(--green-accent);
+  color: white;
+}
+
+.call-video-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.call-video-remote {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.call-video-local {
+  position: absolute;
+  bottom: 100px;
+  right: 20px;
+  width: 110px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid white;
+}
+
 @media (max-width: 768px) {
   .sidebar {
     width: 100%;
